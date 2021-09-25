@@ -85,6 +85,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy /Y "$(TargetPath)" "$(ProjectDir)\..\..\Mods\CustomPilotDecorator"
-copy /Y "$(ProjectDir)\mod.json" "$(ProjectDir)\..\..\Mods\CustomPilotDecorator"</PostBuildEvent>
+copy /Y "$(ProjectDir)\mod.json" "$(ProjectDir)\..\..\Mods\CustomPilotDecorator"
+copy /Y "$(ProjectDir)\Readme.txt" "$(ProjectDir)\..\..\Mods\CustomPilotDecorator"</PostBuildEvent>
   </PropertyGroup>
 </Project>
