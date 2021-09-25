@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1300
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomPilotDecorator", "CustomPilotDecorator\CustomPilotDecorator.csproj", "{D5004F6F-5C9C-48B5-9864-9D192E019564}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D5004F6F-5C9C-48B5-9864-9D192E019564}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5004F6F-5C9C-48B5-9864-9D192E019564}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5004F6F-5C9C-48B5-9864-9D192E019564}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5004F6F-5C9C-48B5-9864-9D192E019564}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C09163EA-26F5-4937-9178-D4A8823AC282}
+	EndGlobalSection
+EndGlobal
