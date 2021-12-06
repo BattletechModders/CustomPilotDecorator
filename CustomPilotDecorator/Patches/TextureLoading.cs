@@ -2,6 +2,7 @@
 using BattleTech.Data;
 using BattleTech.Portraits;
 using BattleTech.UI;
+using BattleTech.UI.Tooltips;
 using Gif.Components;
 using Harmony;
 using IRBTModUtils;
@@ -53,6 +54,370 @@ namespace CustomPilotDecorator {
         this.index = (this.index + 1) % gif.frames.Count;
         t = 0f;
         portrait.texture = gif.frames[this.index].m_texture2d;
+      }
+    }
+  }
+  [HarmonyPatch(typeof(InventoryDataObject_SalvageFullMech))]
+  [HarmonyPatch("RefreshInfoOnWidget")]
+  [HarmonyPatch(MethodType.Normal)]
+  public static class InventoryDataObject_SalvageFullMech_RefreshInfoOnWidget {
+    public static void Postfix(InventoryDataObject_SalvageFullMech __instance, InventoryItemElement theWidget) {
+      try {
+        Log.TWL(0, "InventoryDataObject_SalvageFullMech.RefreshInfoOnWidget");
+        if (theWidget.iconMech != null) {
+          GifSpriteAnimator gifSpriteAnimator = theWidget.iconMech.gameObject.GetComponent<GifSpriteAnimator>();
+          if (gifSpriteAnimator == null) {
+            gifSpriteAnimator = theWidget.iconMech.gameObject.AddComponent<GifSpriteAnimator>();
+            gifSpriteAnimator.portrait = theWidget.iconMech;
+          }
+          gifSpriteAnimator.gif = null;
+          if (__instance.mechDef != null) {
+            gifSpriteAnimator.gif = __instance.mechDef.Description.GetDescrGifSprite();
+          }
+          gifSpriteAnimator.Reset();
+          Log.WL(1, "gifSpriteAnimator.gif: " + (gifSpriteAnimator.gif == null ? "null" : "not null"));
+        }
+      } catch (Exception e) {
+        Log.TWL(0, e.ToString(), true);
+      }
+    }
+  }
+  [HarmonyPatch(typeof(InventoryDataObject_ShopFullMech))]
+  [HarmonyPatch("RefreshInfoOnWidget")]
+  [HarmonyPatch(MethodType.Normal)]
+  public static class InventoryDataObject_ShopFullMech_RefreshInfoOnWidget {
+    public static void Postfix(InventoryDataObject_ShopFullMech __instance, InventoryItemElement theWidget) {
+      try {
+        Log.TWL(0, "InventoryDataObject_ShopFullMech.RefreshInfoOnWidget");
+        if (theWidget.iconMech != null) {
+          GifSpriteAnimator gifSpriteAnimator = theWidget.iconMech.gameObject.GetComponent<GifSpriteAnimator>();
+          if (gifSpriteAnimator == null) {
+            gifSpriteAnimator = theWidget.iconMech.gameObject.AddComponent<GifSpriteAnimator>();
+            gifSpriteAnimator.portrait = theWidget.iconMech;
+          }
+          gifSpriteAnimator.gif = null;
+          if (__instance.mechDef != null) {
+            gifSpriteAnimator.gif = __instance.mechDef.Description.GetDescrGifSprite();
+          }
+          gifSpriteAnimator.Reset();
+          Log.WL(1, "gifSpriteAnimator.gif: " + (gifSpriteAnimator.gif == null ? "null" : "not null"));
+        }
+      } catch (Exception e) {
+        Log.TWL(0, e.ToString(), true);
+      }
+    }
+  }
+  [HarmonyPatch(typeof(LanceMechPilotPortraits))]
+  [HarmonyPatch("Init")]
+  [HarmonyPatch(MethodType.Normal)]
+  public static class LanceMechPilotPortraits_Init {
+    public static void Postfix(LanceMechPilotPortraits __instance, MechDef mechDef, PilotDef pilotDef, DataManager dm) {
+      try {
+        Log.TWL(0, "LanceMechPilotPortraits.Init");
+        if (__instance.mechImage != null) {
+          GifSpriteAnimator gifSpriteAnimator = __instance.mechImage.gameObject.GetComponent<GifSpriteAnimator>();
+          if (gifSpriteAnimator == null) {
+            gifSpriteAnimator = __instance.mechImage.gameObject.AddComponent<GifSpriteAnimator>();
+            gifSpriteAnimator.portrait = __instance.mechImage;
+          }
+          gifSpriteAnimator.gif = null;
+          if (mechDef != null) {
+            gifSpriteAnimator.gif = mechDef.Chassis.Description.GetDescrGifSprite();
+          }
+          gifSpriteAnimator.Reset();
+          Log.WL(1, "gifSpriteAnimator.gif: " + (gifSpriteAnimator.gif == null ? "null" : "not null"));
+        }
+        if (__instance.pilotImage != null) {
+          GifSpriteAnimator gifSpriteAnimator = __instance.pilotImage.gameObject.GetComponent<GifSpriteAnimator>();
+          if (gifSpriteAnimator == null) {
+            gifSpriteAnimator = __instance.pilotImage.gameObject.AddComponent<GifSpriteAnimator>();
+            gifSpriteAnimator.portrait = __instance.pilotImage;
+          }
+          gifSpriteAnimator.gif = null;
+          if (pilotDef != null) {
+            gifSpriteAnimator.gif = pilotDef.GetPortraitGifSprite();
+          }
+          gifSpriteAnimator.Reset();
+          Log.WL(1, "gifSpriteAnimator.gif: " + (gifSpriteAnimator.gif == null ? "null" : "not null"));
+        }
+      } catch (Exception e) {
+        Log.TWL(0, e.ToString(), true);
+      }
+    }
+  }
+  [HarmonyPatch(typeof(LanceMechSlot))]
+  [HarmonyPatch("Init")]
+  [HarmonyPatch(MethodType.Normal)]
+  public static class LanceMechSlot_Init {
+    public static void Postfix(LanceMechSlot __instance, MechDef mechDef, LanceConfigurator LC, int availableCBills, bool inSelectionList, bool isFavorite, OnMechSlotSelected mechCB = null) {
+      try {
+        Log.TWL(0, "LanceMechSlot.Init");
+        if (__instance.mechImage != null) {
+          GifSpriteAnimator gifSpriteAnimator = __instance.mechImage.gameObject.GetComponent<GifSpriteAnimator>();
+          if (gifSpriteAnimator == null) {
+            gifSpriteAnimator = __instance.mechImage.gameObject.AddComponent<GifSpriteAnimator>();
+            gifSpriteAnimator.portrait = __instance.mechImage;
+          }
+          gifSpriteAnimator.gif = null;
+          if (mechDef != null) {
+            gifSpriteAnimator.gif = __instance.curMech.Chassis.Description.GetDescrGifSprite();
+          }
+          gifSpriteAnimator.Reset();
+          Log.WL(1, "gifSpriteAnimator.gif: " + (gifSpriteAnimator.gif == null ? "null" : "not null"));
+        }
+      } catch (Exception e) {
+        Log.TWL(0, e.ToString(), true);
+      }
+    }
+  }
+  [HarmonyPatch(typeof(LanceMechSlot))]
+  [HarmonyPatch("SetRandomOverlay")]
+  [HarmonyPatch(MethodType.Normal)]
+  public static class LanceMechSlot_SetRandomOverlay {
+    public static void Postfix(LanceMechSlot __instance, bool isRandom) {
+      try {
+        Log.TWL(0, "LanceMechSlot.SetRandomOverlay");
+        if (isRandom == false) { return; }
+        if (__instance.mechImage != null) {
+          GifSpriteAnimator gifSpriteAnimator = __instance.mechImage.gameObject.GetComponent<GifSpriteAnimator>();
+          if (gifSpriteAnimator == null) {
+            gifSpriteAnimator = __instance.mechImage.gameObject.AddComponent<GifSpriteAnimator>();
+            gifSpriteAnimator.portrait = __instance.mechImage;
+          }
+          gifSpriteAnimator.gif = null;
+          gifSpriteAnimator.Reset();
+          Log.WL(1, "gifSpriteAnimator.gif: " + (gifSpriteAnimator.gif == null ? "null" : "not null"));
+        }
+      } catch (Exception e) {
+        Log.TWL(0, e.ToString(), true);
+      }
+    }
+  }
+  [HarmonyPatch(typeof(LanceMechWarriorSlot))]
+  [HarmonyPatch("Init")]
+  [HarmonyPatch(MethodType.Normal)]
+  public static class LanceMechWarriorSlot_Init {
+    public static void Postfix(LanceMechWarriorSlot __instance, PilotDef pilot, LanceConfigurator LC, bool inSelectionList,bool isFavorite, OnMechWarriorSlotSelected pilotCB) {
+      try {
+        Log.TWL(0, "LanceMechWarriorSlot.Init");
+        if (__instance.pilotImage != null) {
+          GifSpriteAnimator gifSpriteAnimator = __instance.pilotImage.gameObject.GetComponent<GifSpriteAnimator>();
+          if (gifSpriteAnimator == null) {
+            gifSpriteAnimator = __instance.pilotImage.gameObject.AddComponent<GifSpriteAnimator>();
+            gifSpriteAnimator.portrait = __instance.pilotImage;
+          }
+          gifSpriteAnimator.gif = null;
+          if (__instance.curPilot != null) {
+            gifSpriteAnimator.gif = __instance.curPilot.GetPortraitGifSprite();
+          }
+          gifSpriteAnimator.Reset();
+          Log.WL(1, "gifSpriteAnimator.gif: " + (gifSpriteAnimator.gif == null ? "null" : "not null"));
+        }
+      } catch (Exception e) {
+        Log.TWL(0, e.ToString(), true);
+      }
+    }
+  }
+  [HarmonyPatch(typeof(LanceMechWarriorSlot))]
+  [HarmonyPatch("SetRandomOverlay")]
+  [HarmonyPatch(MethodType.Normal)]
+  public static class LanceMechWarriorSlot_SetRandomOverlay {
+    public static void Postfix(LanceMechWarriorSlot __instance, bool isRandom) {
+      try {
+        Log.TWL(0, "LanceMechWarriorSlot.SetRandomOverlay");
+        if (isRandom == false) { return; }
+        if (__instance.pilotImage != null) {
+          GifSpriteAnimator gifSpriteAnimator = __instance.pilotImage.gameObject.GetComponent<GifSpriteAnimator>();
+          if (gifSpriteAnimator == null) {
+            gifSpriteAnimator = __instance.pilotImage.gameObject.AddComponent<GifSpriteAnimator>();
+            gifSpriteAnimator.portrait = __instance.pilotImage;
+          }
+          gifSpriteAnimator.gif = null;
+          gifSpriteAnimator.Reset();
+          Log.WL(1, "gifSpriteAnimator.gif: " + (gifSpriteAnimator.gif == null ? "null" : "not null"));
+        }
+      } catch (Exception e) {
+        Log.TWL(0, e.ToString(), true);
+      }
+    }
+  }
+  [HarmonyPatch(typeof(ListElementController_SalvageFullMech_NotListView))]
+  [HarmonyPatch("RefreshInfoOnWidget")]
+  [HarmonyPatch(MethodType.Normal)]
+  public static class ListElementController_SalvageFullMech_NotListView_RefreshInfoOnWidget {
+    public static void Postfix(ListElementController_SalvageFullMech_NotListView __instance, InventoryItemElement theWidget) {
+      try {
+        Log.TWL(0, "ListElementController_SalvageFullMech_NotListView.RefreshInfoOnWidget");
+        if (theWidget.iconMech != null) {
+          GifSpriteAnimator gifSpriteAnimator = theWidget.iconMech.gameObject.GetComponent<GifSpriteAnimator>();
+          if (gifSpriteAnimator == null) {
+            gifSpriteAnimator = theWidget.iconMech.gameObject.AddComponent<GifSpriteAnimator>();
+            gifSpriteAnimator.portrait = theWidget.iconMech;
+          }
+          gifSpriteAnimator.gif = null;
+          if (__instance.mechDef != null) {
+            gifSpriteAnimator.gif = __instance.mechDef.Description.GetDescrGifSprite();
+          }
+          gifSpriteAnimator.Reset();
+          Log.WL(1, "gifSpriteAnimator.gif: " + (gifSpriteAnimator.gif == null ? "null" : "not null"));
+        }
+      } catch (Exception e) {
+        Log.TWL(0, e.ToString(), true);
+      }
+    }
+  }
+  [HarmonyPatch(typeof(MechBayMechUnitElement))]
+  [HarmonyPatch("SetData")]
+  [HarmonyPatch(MethodType.Normal)]
+  [HarmonyPatch(new Type[] { typeof(IMechLabDropTarget), typeof(DataManager), typeof(int), typeof(MechDef), typeof(bool), typeof(bool), typeof(bool), typeof(bool), typeof(bool), typeof(bool) })]
+  public static class MechBayMechUnitElement_SetData_Gif {
+    public static void Postfix(MechBayMechUnitElement __instance, IMechLabDropTarget dropParent, DataManager dataManager,int baySlot,MechDef mechDef,bool inMaintenance,bool isFieldable, bool hasFieldableWarnings,bool allowInteraction, bool blockRaycast, bool buttonEnabled) {
+      try {
+        Log.TWL(0, "MechBayMechUnitElement.SetData");
+        if (__instance.mechImage != null) {
+          GifSpriteAnimator gifSpriteAnimator = __instance.mechImage.gameObject.GetComponent<GifSpriteAnimator>();
+          if (gifSpriteAnimator == null) {
+            gifSpriteAnimator = __instance.mechImage.gameObject.AddComponent<GifSpriteAnimator>();
+            gifSpriteAnimator.portrait = __instance.mechImage;
+          }
+          gifSpriteAnimator.gif = null;
+          if (__instance.chassisDef != null) {
+            gifSpriteAnimator.gif = __instance.chassisDef.Description.GetDescrGifSprite();
+          }
+          gifSpriteAnimator.Reset();
+          Log.WL(1, "gifSpriteAnimator.gif: " + (gifSpriteAnimator.gif == null ? "null" : "not null"));
+        }
+      } catch (Exception e) {
+        Log.TWL(0, e.ToString(), true);
+      }
+    }
+  }
+  [HarmonyPatch(typeof(MechBayMechUnitElement))]
+  [HarmonyPatch("SetData")]
+  [HarmonyPatch(MethodType.Normal)]
+  [HarmonyPatch(new Type[] { typeof(IMechLabDropTarget), typeof(DataManager), typeof(int), typeof(ChassisDef), typeof(bool), typeof(bool) })]
+  public static class MechBayMechUnitElement_SetData_Gif2 {
+    public static void Postfix(MechBayMechUnitElement __instance, IMechLabDropTarget dropParent, DataManager dataManager, int baySlot, ChassisDef chassisDef, bool inMaintenance, bool allowDrag) {
+      try {
+        Log.TWL(0, "MechBayMechUnitElement.SetData");
+        if (__instance.mechImage != null) {
+          GifSpriteAnimator gifSpriteAnimator = __instance.mechImage.gameObject.GetComponent<GifSpriteAnimator>();
+          if (gifSpriteAnimator == null) {
+            gifSpriteAnimator = __instance.mechImage.gameObject.AddComponent<GifSpriteAnimator>();
+            gifSpriteAnimator.portrait = __instance.mechImage;
+          }
+          gifSpriteAnimator.gif = null;
+          if (__instance.chassisDef != null) {
+            gifSpriteAnimator.gif = __instance.chassisDef.Description.GetDescrGifSprite();
+          }
+          gifSpriteAnimator.Reset();
+          Log.WL(1, "gifSpriteAnimator.gif: " + (gifSpriteAnimator.gif == null ? "null" : "not null"));
+        }
+      } catch (Exception e) {
+        Log.TWL(0, e.ToString(), true);
+      }
+    }
+  }
+  [HarmonyPatch(typeof(MechUnitElementWidget))]
+  [HarmonyPatch("SetIcon")]
+  [HarmonyPatch(MethodType.Normal)]
+  [HarmonyPatch(new Type[] { typeof(string) })]
+  public static class MechUnitElementWidget_SetIcon {
+    public static void Postfix(MechUnitElementWidget __instance, string icon) {
+      try {
+        Log.TWL(0, "MechUnitElementWidget.SetIcon");
+        if (__instance.mechIcon != null) {
+          GifSpriteAnimator gifSpriteAnimator = __instance.mechIcon.gameObject.GetComponent<GifSpriteAnimator>();
+          if (gifSpriteAnimator == null) {
+            gifSpriteAnimator = __instance.mechIcon.gameObject.AddComponent<GifSpriteAnimator>();
+            gifSpriteAnimator.portrait = __instance.mechIcon;
+          }
+          gifSpriteAnimator.gif = null;
+          if (string.IsNullOrEmpty(icon) == false) {
+            gifSpriteAnimator.gif = IRBTModUtils.GifStorageHelper.GetSprites(icon);
+          }
+          gifSpriteAnimator.Reset();
+          Log.WL(1, "gifSpriteAnimator.gif: " + (gifSpriteAnimator.gif == null ? "null" : "not null"));
+        }
+      } catch (Exception e) {
+        Log.TWL(0, e.ToString(), true);
+      }
+    }
+  }
+  [HarmonyPatch(typeof(TooltipPrefab_Chassis))]
+  [HarmonyPatch("SetData")]
+  [HarmonyPatch(MethodType.Normal)]
+  public static class TooltipPrefab_Chassis_SetData {
+    public static void Postfix(TooltipPrefab_Chassis __instance, object data) {
+      try {
+        Log.TWL(0, "TooltipPrefab_Chassis.SetData");
+        if (__instance.PNGImage != null) {
+          GifSpriteAnimator gifSpriteAnimator = __instance.PNGImage.gameObject.GetComponent<GifSpriteAnimator>();
+          if (gifSpriteAnimator == null) {
+            gifSpriteAnimator = __instance.PNGImage.gameObject.AddComponent<GifSpriteAnimator>();
+            gifSpriteAnimator.portrait = __instance.PNGImage;
+          }
+          gifSpriteAnimator.gif = null;
+          if (data is ChassisDef chassisDef) {
+            gifSpriteAnimator.gif = chassisDef.Description.GetDescrGifSprite();
+          }
+          gifSpriteAnimator.Reset();
+          Log.WL(1, "gifSpriteAnimator.gif: " + (gifSpriteAnimator.gif == null ? "null" : "not null"));
+        }
+      } catch (Exception e) {
+        Log.TWL(0, e.ToString(), true);
+      }
+    }
+  }
+  [HarmonyPatch(typeof(TooltipPrefab_Mech))]
+  [HarmonyPatch("SetData")]
+  [HarmonyPatch(MethodType.Normal)]
+  public static class TooltipPrefab_Mech_SetData {
+    public static void Postfix(TooltipPrefab_Mech __instance, object data) {
+      try {
+        Log.TWL(0, "TooltipPrefab_Mech.SetData");
+        if (__instance.PNGImage != null) {
+          GifSpriteAnimator gifSpriteAnimator = __instance.PNGImage.gameObject.GetComponent<GifSpriteAnimator>();
+          if (gifSpriteAnimator == null) {
+            gifSpriteAnimator = __instance.PNGImage.gameObject.AddComponent<GifSpriteAnimator>();
+            gifSpriteAnimator.portrait = __instance.PNGImage;
+          }
+          gifSpriteAnimator.gif = null;
+          if (data is MechDef mechDef) {
+            gifSpriteAnimator.gif = mechDef.Chassis.Description.GetDescrGifSprite();
+          }
+          gifSpriteAnimator.Reset();
+          Log.WL(1, "gifSpriteAnimator.gif: " + (gifSpriteAnimator.gif == null ? "null" : "not null"));
+        }
+      } catch (Exception e) {
+        Log.TWL(0, e.ToString(), true);
+      }
+    }
+  }
+  [HarmonyPatch(typeof(PortraitPreviewPanel))]
+  [HarmonyPatch("SetData")]
+  [HarmonyPatch(MethodType.Normal)]
+  public static class PortraitPreviewPanel_SetData {
+    public static void Postfix(PortraitPreviewPanel __instance, PilotDef pilot, DataManager dataManager) {
+      try {
+        Log.TWL(0, "PortraitPreviewPanel.SetData");
+        if (__instance.portraitPreviewImage != null) {
+          GifImageAnimator gifImageAnimator = __instance.portraitPreviewImage.gameObject.GetComponent<GifImageAnimator>();
+          if (gifImageAnimator == null) {
+            gifImageAnimator = __instance.portraitPreviewImage.gameObject.AddComponent<GifImageAnimator>();
+            gifImageAnimator.portrait = __instance.portraitPreviewImage;
+          }
+          gifImageAnimator.gif = null;
+          if (pilot != null) {
+            if (pilot.Description != null) {
+              gifImageAnimator.gif = pilot.GetPortraitGifImage();
+            }
+          }
+          gifImageAnimator.Reset();
+          Log.WL(1, "GifImageAnimator.gif: " + (gifImageAnimator.gif == null ? "null" : "not null"));
+        }
+      } catch (Exception e) {
+        Log.TWL(0, e.ToString(), true);
       }
     }
   }
