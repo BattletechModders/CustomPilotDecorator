@@ -83,6 +83,31 @@ namespace CustomPilotDecorator {
       }
     }
   }
+  [HarmonyPatch(typeof(SGCharacterCreationWidget))]
+  [HarmonyPatch("UpdateSummary")]
+  [HarmonyPatch(MethodType.Normal)]
+  public static class SGCharacterCreationWidget_UpdateSummary {
+    public static void Postfix(SGCharacterCreationWidget __instance) {
+      try {
+        Log.TWL(0, "SGCharacterCreationWidget.UpdateSummary");
+        if (__instance.summaryScreen.portraitRenderer.portraitPreviewImage != null) {
+          GifImageAnimator gifImageAnimator = __instance.summaryScreen.portraitRenderer.portraitPreviewImage.gameObject.GetComponent<GifImageAnimator>();
+          if (gifImageAnimator == null) {
+            gifImageAnimator = __instance.summaryScreen.portraitRenderer.portraitPreviewImage.gameObject.AddComponent<GifImageAnimator>();
+            gifImageAnimator.portrait = __instance.summaryScreen.portraitRenderer.portraitPreviewImage;
+          }
+          gifImageAnimator.gif = null;
+          if (__instance.createdPilot != null) {
+            gifImageAnimator.gif = __instance.createdPilot.GetPortraitGifImage();
+          }
+          gifImageAnimator.Reset();
+          Log.WL(1, "GifImageAnimator.gif: " + (gifImageAnimator.gif == null ? "null" : "not null"));
+        }
+      } catch (Exception e) {
+        Log.TWL(0, e.ToString(), true);
+      }
+    }
+  }
   [HarmonyPatch(typeof(SGBarracksDossierPanel))]
   [HarmonyPatch("SetPilot")]
   [HarmonyPatch(MethodType.Normal)]

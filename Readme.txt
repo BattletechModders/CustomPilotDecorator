@@ -15,3 +15,5 @@ to add icon you should create PilotDecorationDef entry to manifest
 	"ShouldHaveTags": [ ] - list of tags pilot should have to display icon
 	"ShouldNotHaveTags": [ "pilot_nomech_crew" ] - list pf tags pilot should not have to display icon
 }
+
+very latest build can be got there https://github.com/CMiSSioN/CBDebugEnviroment
