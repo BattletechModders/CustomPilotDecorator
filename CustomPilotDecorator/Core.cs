@@ -3,6 +3,7 @@ using Harmony;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -46,6 +47,11 @@ namespace CustomPilotDecorator{
       Core.BaseDir = directory;
       Core.Settings = JsonConvert.DeserializeObject<CustomPilotDecorator.CPDSettings>(settingsJson);
       Log.TWL(0, "Initing... " + directory + " version: " + Assembly.GetExecutingAssembly().GetName().Version, true);
+      Log.WL(1, "PNG encoder guid:" + ImageFormat.Png.Guid, true);
+      Log.WL(1, "ImageCodecInfo.GetImageEncoders:" + ImageCodecInfo.GetImageEncoders().Length,true);
+      foreach(ImageCodecInfo encoder in ImageCodecInfo.GetImageEncoders()) {
+        Log.WL(2, encoder.FormatID.ToString(), true);
+      }
       try {
         var harmony = HarmonyInstance.Create("io.kmission.custompilotdecorator");
         harmony.PatchAll(Assembly.GetExecutingAssembly());

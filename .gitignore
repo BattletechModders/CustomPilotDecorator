@@ -332,3 +332,21 @@ ASALocalRun/
 
 # Local History for Visual Studio
 .localhistory/
+NGif_src.zip
+NGif_src/Gif/Components/AnimatedGifEncoder.cs
+NGif_src/Gif/Components/AssemblyInfo.cs
+NGif_src/Gif/Components/Components.csproj
+NGif_src/Gif/Components/Gif.resharperoptions
+NGif_src/Gif/Components/GifDecoder.cs
+NGif_src/Gif/Components/LZWEncoder.cs
+NGif_src/Gif/Components/NeuQuant.cs
+NGif_src/Gif/Example/App.ico
+NGif_src/Gif/Example/AssemblyInfo.cs
+NGif_src/Gif/Example/Example.csproj
+NGif_src/Gif/Example/ExampleMain.cs
+NGif_src/Gif/Example/Res/01.png
+NGif_src/Gif/Example/Res/02.png
+NGif_src/Gif/Example/Res/03.png
+NGif_src/Gif/Example/Res/test.gif
+NGif_src/Gif/NGif.sln
+NGif_src/Gif/Refs/gif.zip

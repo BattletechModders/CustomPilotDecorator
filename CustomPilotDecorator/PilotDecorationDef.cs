@@ -20,6 +20,7 @@ namespace CustomPilotDecorator {
     public static HashSet<PilotDecorationDef> getDecorations(this PilotDef def) {
       HashSet<PilotDecorationDef> result = new HashSet<PilotDecorationDef>();
       Log.TWL(0, "PilotDecorationDefHelper.getDecorations " + def.Description.Id + ":" + def.Description.Callsign );
+      Log.W(1, "tags:"); foreach (string tag in def.PilotTags) { Log.W(1, tag); }; Log.WL(0, "");
       foreach (var decoration in PilotDecorationDefs) {
         if (decoration.Value.shouldHaveTags.Count > 0) {
           if (def.PilotTags.ContainsAll(decoration.Value.shouldHaveTags) == false) {
@@ -36,6 +37,7 @@ namespace CustomPilotDecorator {
     }
     public static HashSet<PilotDecorationDef> getDecorations(this PilotDef def, DecorationType type) {
       Log.TWL(0, "PilotDecorationDefHelper.getDecorations "+def.Description.Id+":"+def.Description.Callsign+" type:"+type);
+      Log.W(1, "tags:"); foreach (string tag in def.PilotTags) { Log.W(1, tag); }; Log.WL(0, "");
       HashSet<PilotDecorationDef> result = new HashSet<PilotDecorationDef>();
       foreach (var decoration in PilotDecorationDefs) {
         if (decoration.Value.Type != type) { continue; }
