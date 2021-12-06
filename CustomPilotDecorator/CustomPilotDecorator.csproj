@@ -99,32 +99,32 @@
     <PostBuildEvent>if exist "$(BattleTechGameDir)\Mods_CBDE\CustomPilotDecorator" (
   echo %25BattleTechGameDir%25
   copy /Y "$(TargetPath)" "$(BattleTechGameDir)\Mods_CBDE\CustomPilotDecorator"
-	copy /Y "$(ProjectDir)\mod.json" "$(BattleTechGameDir)\Mods_CBDE\CustomPilotDecorator"
-	copy /Y "$(ProjectDir)\Readme.txt" "$(BattleTechGameDir)\Mods_CBDE\CustomPilotDecorator"
+  copy /Y "$(ProjectDir)\mod.json" "$(BattleTechGameDir)\Mods_CBDE\CustomPilotDecorator"
+  copy /Y "$(ProjectDir)\Readme.txt" "$(BattleTechGameDir)\Mods_CBDE\CustomPilotDecorator"
 )
 if exist "$(BattleTechGameDir)\Mods\CustomPilotDecorator" (
   echo %25BattleTechGameDir%25
   copy /Y "$(TargetPath)" "$(BattleTechGameDir)\Mods\CustomPilotDecorator"
-	copy /Y "$(ProjectDir)\mod.json" "$(BattleTechGameDir)\Mods\CustomPilotDecorator"
-	copy /Y "$(ProjectDir)\Readme.txt" "$(BattleTechGameDir)\Mods\CustomPilotDecorator"
+  copy /Y "$(ProjectDir)\mod.json" "$(BattleTechGameDir)\Mods\CustomPilotDecorator"
+  copy /Y "$(ProjectDir)\Readme.txt" "$(BattleTechGameDir)\Mods\CustomPilotDecorator"
 )
 if exist "$(RogueTechRepo)\CustomPilotDecorator" (
   echo %25BattleTechGameDir%25
   copy /Y "$(TargetPath)" "$(RogueTechRepo)\CustomPilotDecorator"
-	copy /Y "$(ProjectDir)\mod.json" "$(BattleTechGameDir)\Mods\CustomPilotDecorator"
-	copy /Y "$(ProjectDir)\Readme.txt" "$(BattleTechGameDir)\Mods\CustomPilotDecorator"
+  copy /Y "$(ProjectDir)\mod.json" "$(RogueTechRepo)\CustomPilotDecorator"
+  copy /Y "$(ProjectDir)\Readme.txt" "$(RogueTechRepo)\CustomPilotDecorator"
 )
 if exist "$(BTARepo)\CustomPilotDecorator" (
   echo %25BattleTechGameDir%25
   copy /Y "$(TargetPath)" "$(BTARepo)\CommanderPortraitLoader"
-	copy /Y "$(ProjectDir)\mod.json" "$(BattleTechGameDir)\Mods\CustomPilotDecorator"
-	copy /Y "$(ProjectDir)\Readme.txt" "$(BattleTechGameDir)\Mods\CustomPilotDecorator"
+  copy /Y "$(ProjectDir)\mod.json" "$(BTARepo)\CustomPilotDecorator"
+  copy /Y "$(ProjectDir)\Readme.txt" "$(BTARepo)\CustomPilotDecorator"
 )
 if exist "$(BattleTechGameDir)\Release_CAC\CustomBundle\CustomPilotDecorator" (
   echo %25BattleTechGameDir%25
   copy /Y "$(TargetPath)" "$(BattleTechGameDir)\Release_CAC\Release\CustomBundle\CustomPilotDecorator"
-	copy /Y "$(ProjectDir)\mod.json" "$(BattleTechGameDir)\Mods\CustomPilotDecorator"
-	copy /Y "$(ProjectDir)\Readme.txt" "$(BattleTechGameDir)\Mods\CustomPilotDecorator"
+  copy /Y "$(ProjectDir)\mod.json" "$(BattleTechGameDir)\Release_CAC\Release\CustomBundle\CustomPilotDecorator"
+  copy /Y "$(ProjectDir)\Readme.txt" "$(BattleTechGameDir)\Release_CAC\Release\CustomBundle\CustomPilotDecorator"
 )</PostBuildEvent>
   </PropertyGroup>
 </Project>
