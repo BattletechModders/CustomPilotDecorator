@@ -3,7 +3,7 @@ using BattleTech.Data;
 using BattleTech.Portraits;
 using BattleTech.UI;
 using BattleTech.UI.Tooltips;
-using Gif.Components;
+//using Gif.Components;
 using Harmony;
 using IRBTModUtils;
 using System;

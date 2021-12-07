@@ -49,7 +49,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -78,7 +77,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core.cs" />
-    <Compile Include="GitDecoder.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Patches\PilotDef_patches.cs" />
     <Compile Include="Patches\SGBarracsRosterSlot_patches.cs" />
