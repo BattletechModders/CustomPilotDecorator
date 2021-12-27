@@ -131,7 +131,7 @@ namespace CustomPilotDecorator {
         decorations = ___pilot == null ? new List<PilotDecorationDef>() : ___pilot.pilotDef.getDecorations(DecorationType.Shevron).ToList();
         for(int t = 4; t < ___roninIcon.gameObject.transform.parent.childCount; ++t) {
           Transform tr = ___roninIcon.gameObject.transform.parent.GetChild(t);
-          if ((t - 4) > decorations.Count) { tr.gameObject.SetActive(false); };
+          if ((t - 4) >= decorations.Count) { tr.gameObject.SetActive(false); continue; };
           tr.gameObject.SetActive(true);
           PilotDecorationDef decoration = decorations[t - 4];
           SVGImage img = tr.gameObject.GetComponent<SVGImage>();
