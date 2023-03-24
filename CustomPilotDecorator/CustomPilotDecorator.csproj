@@ -34,14 +34,19 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="0Harmony">
-      <HintPath>$(BattleTechGameDir)\BattleTech_Data\Managed\0Harmony.dll</HintPath>
+    <PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.3.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="0Harmony.dll">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(BattleTechGameDir)\Mods\ModTek\Harmony12X\0Harmony.dll</HintPath>
+    </Reference>
+    <Reference Include="Assembly-CSharp" Publicize="true">
+      <HintPath>$(BattleTechGameDir)\Mods\.modtek\AssembliesInjected\Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Assembly-CSharp-firstpass">
       <HintPath>$(BattleTechGameDir)\BattleTech_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
-    </Reference>
-    <Reference Include="Assembly-CSharp_publicized">
-      <HintPath>$(BattleTechGameDir)\BattleTech_Data\Managed\publicized_assemblies\Assembly-CSharp_publicized.dll</HintPath>
     </Reference>
     <Reference Include="IRBTModUtils">
       <HintPath>$(BattleTechGameDir)\Mods\IRBTModUtils\IRBTModUtils.dll</HintPath>
@@ -96,29 +101,29 @@
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>if exist "$(BattleTechGameDir)\Mods_CBDE\CustomPilotDecorator" (
+    <PostBuildEvent>if exist "$(BattleTechGameDir)\Mods_CBDE\Core\CustomPilotDecorator" (
   echo %25BattleTechGameDir%25
-  copy /Y "$(TargetPath)" "$(BattleTechGameDir)\Mods_CBDE\CustomPilotDecorator"
-  copy /Y "$(ProjectDir)\mod.json" "$(BattleTechGameDir)\Mods_CBDE\CustomPilotDecorator"
-  copy /Y "$(ProjectDir)\Readme.txt" "$(BattleTechGameDir)\Mods_CBDE\CustomPilotDecorator"
+  copy /Y "$(TargetPath)" "$(BattleTechGameDir)\Mods_CBDE\Core\CustomPilotDecorator"
+  copy /Y "$(ProjectDir)\mod.json" "$(BattleTechGameDir)\Mods_CBDE\Core\CustomPilotDecorator"
+  copy /Y "$(ProjectDir)\Readme.txt" "$(BattleTechGameDir)\Mods_CBDE\Core\CustomPilotDecorator"
 )
-if exist "$(BattleTechGameDir)\Mods\CustomPilotDecorator" (
+if exist "$(BattleTechGameDir)\Mods\Core\CustomPilotDecorator" (
   echo %25BattleTechGameDir%25
-  copy /Y "$(TargetPath)" "$(BattleTechGameDir)\Mods\CustomPilotDecorator"
-  copy /Y "$(ProjectDir)\mod.json" "$(BattleTechGameDir)\Mods\CustomPilotDecorator"
-  copy /Y "$(ProjectDir)\Readme.txt" "$(BattleTechGameDir)\Mods\CustomPilotDecorator"
+  copy /Y "$(TargetPath)" "$(BattleTechGameDir)\Mods\Core\CustomPilotDecorator"
+  copy /Y "$(ProjectDir)\mod.json" "$(BattleTechGameDir)\Mods\Core\CustomPilotDecorator"
+  copy /Y "$(ProjectDir)\Readme.txt" "$(BattleTechGameDir)\Mods\Core\CustomPilotDecorator"
 )
-if exist "$(RogueTechRepo)\CustomPilotDecorator" (
+if exist "$(RogueTechRepo)\Core\CustomPilotDecorator" (
   echo %25BattleTechGameDir%25
-  copy /Y "$(TargetPath)" "$(RogueTechRepo)\CustomPilotDecorator"
-  copy /Y "$(ProjectDir)\mod.json" "$(RogueTechRepo)\CustomPilotDecorator"
-  copy /Y "$(ProjectDir)\Readme.txt" "$(RogueTechRepo)\CustomPilotDecorator"
+  copy /Y "$(TargetPath)" "$(RogueTechRepo)\Core\CustomPilotDecorator"
+  copy /Y "$(ProjectDir)\mod.json" "$(RogueTechRepo)\Core\CustomPilotDecorator"
+  copy /Y "$(ProjectDir)\Readme.txt" "$(RogueTechRepo)\Core\CustomPilotDecorator"
 )
-if exist "$(BTARepo)\CustomPilotDecorator" (
+if exist "$(BTARepo)\Core\CustomPilotDecorator" (
   echo %25BattleTechGameDir%25
-  copy /Y "$(TargetPath)" "$(BTARepo)\CommanderPortraitLoader"
-  copy /Y "$(ProjectDir)\mod.json" "$(BTARepo)\CustomPilotDecorator"
-  copy /Y "$(ProjectDir)\Readme.txt" "$(BTARepo)\CustomPilotDecorator"
+  copy /Y "$(TargetPath)" "$(BTARepo)\Core\CommanderPortraitLoader"
+  copy /Y "$(ProjectDir)\mod.json" "$(BTARepo)\Core\CustomPilotDecorator"
+  copy /Y "$(ProjectDir)\Readme.txt" "$(BTARepo)\Core\CustomPilotDecorator"
 )
 if exist "$(BattleTechGameDir)\Release_CAC\CustomBundle\CustomPilotDecorator" (
   echo %25BattleTechGameDir%25

@@ -1,5 +1,5 @@
 ﻿using BattleTech;
-using Harmony;
+using HarmonyLib;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -53,7 +53,7 @@ namespace CustomPilotDecorator{
       //  Log.WL(2, encoder.FormatID.ToString(), true);
       //}
       try {
-        var harmony = HarmonyInstance.Create("io.kmission.custompilotdecorator");
+        var harmony = new Harmony("io.kmission.custompilotdecorator");
         harmony.PatchAll(Assembly.GetExecutingAssembly());
       } catch (Exception e) {
         Log.TWL(0, e.ToString(), true);

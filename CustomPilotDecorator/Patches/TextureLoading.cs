@@ -4,7 +4,7 @@ using BattleTech.Portraits;
 using BattleTech.UI;
 using BattleTech.UI.Tooltips;
 //using Gif.Components;
-using Harmony;
+using HarmonyLib;
 using IRBTModUtils;
 using System;
 using System.Collections;
@@ -530,6 +530,7 @@ namespace CustomPilotDecorator {
     public static void Postfix(CombatHUDPortrait __instance) {
       try {
         Log.TWL(0, "CombatHUDPortrait.ResetDisplayedActor");
+        if (__instance == null) { return; }
         if (__instance.DisplayedActor == null) { return; }
         Pilot pilot = __instance.DisplayedActor.GetPilot();
         if (pilot == null) { return; };

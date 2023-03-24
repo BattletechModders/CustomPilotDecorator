@@ -2,7 +2,7 @@
 using BattleTech.UI;
 using BattleTech.UI.TMProWrapper;
 using BattleTech.UI.Tooltips;
-using Harmony;
+using HarmonyLib;
 using SVGImporter;
 using System;
 using System.Collections.Generic;
